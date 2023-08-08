@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Login page
+{% endblock title %}
+
+{% block container %}
+    <p>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+                {% for field in user_form %}
+                    <span style="color: red">{{ field.errors }}</span>
+                    {{ field.label_tag }}
+                    {{ field }}
+                {% endfor %}
+            <input type="submit" value="OK">
+        </form>
+
+{% endblock container %}
