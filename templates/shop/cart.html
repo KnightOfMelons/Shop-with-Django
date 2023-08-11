@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}
+    Cart
+{% endblock title %}
+
+{% block container %}
+
+    <p><h1 style="text-align: center;">Cart</h1>
+
+    <hr>
+    <div class="row">
+        <div class="col-12 col-md-1 item" style="margin: 2px;">
+            <h3>№</h3>
+        </div>
+        <div class="col-12 col-md-4 item">
+            <h3>Name</h3>
+        </div>
+        <div class="col-12 col-md-2 item">
+            <h3>Quantity</h3>
+        </div>
+        <div class="col-12 col-md-2 item">
+            <h3>Price</h3>
+        </div>
+        <div class="col-12 col-md-2 item">
+            <h3>Amount</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    {% for item in items %}
+    <div class="row">
+        <div class="col-12 col-md-1 item">
+            &nbsp;&nbsp;&nbsp;{{ forloop.counter }}
+        </div>
+        <div class="col-12 col-md-4 item">
+            {{ item.product }}
+        </div>
+        <div class="col-12 col-md-2 item">
+            {{ item.quantity }}
+        </div>
+        <div class="col-12 col-md-2 item">
+            {{ item.price }}
+        </div>
+        <div class="col-12 col-md-2 item">
+            {{ item.amount }}
+        </div>
+        <div class="col-12 col-md-1 item">
+            <form method="post" action="{% url 'cart_delete_item' item.pk %}">
+                {% csrf_token %}
+                <button type="submit" style="">delete</button>
+            </form>
+        </div>
+    </div>
+{% endfor %}
+
+    <hr>
+
+    <p><h4 style="text-align: center;">Total: {{ cart.amount }} rub.</h4>
+
+    <p><h4 style="text-align: center;">
+            <a href="{% url 'make_order' %}">
+                <button>Pay</button>
+            </a>
+        </h4>
+
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+
+{% endblock container %}

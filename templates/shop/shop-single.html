@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}
+    Details
+{% endblock title %}
+
+{% block container %}
+    <section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <div class="card mb-3">
+                        <!--ТУТ КАРТИНКА -->
+                        <img class="card-img img-fluid" src="{{ product.image_url }}" alt="КАРТИНКА" id="product-detail">
+                    </div>
+                </div>
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">{{ product.name }}</h1>
+                            <p class="h3 py-2">{{ product.price }} rub.</p>
+                            <h6>Описание:</h6>
+                            <p>{{ product.note }}</p>
+                        </div>
+                        <button><a href="{% url 'shop' %}" style="color: black; text-decoration: none;">Back to main</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock container %}
