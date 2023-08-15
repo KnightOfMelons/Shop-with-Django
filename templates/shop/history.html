@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}
+    History
+{% endblock title %}
+
+{% block container %}
+
+    <p><h1 style="text-align: center;">History</h1>
+
+    <hr>
+
+    <div class="row">
+        <h4 style="text-align: center;">Data | Amount</h4>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        {% for i in history %}
+            {% if i.status == '2_waiting_for_payment' %}
+                <h4 style="text-align: center;">{{ i.creation_time }} | {{ i.amount }} rub.</h4>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock container %}

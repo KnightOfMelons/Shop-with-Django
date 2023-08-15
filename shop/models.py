@@ -19,7 +19,7 @@ class Product(models.Model):
         ordering = ['pk']
 
     def __str__(self):
-        return f'{self.name} - {self.price}'
+        return f'{self.name}'
 
 
 class Payment(models.Model):
@@ -61,7 +61,7 @@ class Order(models.Model):
         ordering = ['pk']
 
     def __str__(self):
-        return f'{self.user} - {self.amount} - {self.status}'
+        return f'{self.user} | {self.amount} | {self.status}'
 
     @staticmethod
     def get_cart(user: User):
@@ -77,6 +77,11 @@ class Order(models.Model):
                                         amount=0)
         return cart
 
+    @staticmethod
+    def get_history(user: User):
+        history = Order.objects.filter(user=user)
+        return history
+
     def get_amount(self):
         amount = Decimal(0)
         for item in self.orderitem_set.all():
@@ -89,6 +94,7 @@ class Order(models.Model):
             self.status = Order.STATUS_WAITING_FOR_PAYMENT
             self.save()
             auto_payment_unpaid_orders(self.user)
+
 
     @staticmethod
     def get_amount_of_unpaid_orders(user: User):
@@ -109,7 +115,7 @@ class OrderItem(models.Model):
         ordering = ['pk']
 
     def __str__(self):
-        return f'{self.product} - {self.price}'
+        return f'{self.product} | {self.price}'
 
     @property
     def amount(self):

@@ -13,6 +13,7 @@ class ProductsListView(ListView):
     model = Product
     template_name = 'shop/shop.html'
 
+
 class ProductsDetailView(DetailView):
     model = Product
     template_name = 'shop/shop-single.html'
@@ -36,6 +37,7 @@ def add_item_to_cart(request, pk):
             pass
     return redirect('shop')
 
+
 @login_required(login_url=reverse_lazy('login'))
 def cart_view(request):
     cart = Order.get_cart(request.user)
@@ -58,8 +60,29 @@ class CartDeleteItem(DeleteView):
         qs.filter(order__user=self.request.user)
         return qs
 
+
 @login_required(login_url=reverse_lazy('login'))
 def make_order(request):
     cart = Order.get_cart(request.user)
     cart.make_order()
     return redirect('shop')
+
+@login_required(login_url=reverse_lazy('login'))
+def history_page(request):
+    history = Order.get_history(request.user)
+    context = {
+        'history': history,
+    }
+    return render(request, 'shop/history.html', context)
+
+
+
+    # all_orders = Order.objects.all()
+    # print(all_orders)
+    #
+    # orders_filtred = Order.objects.filter(user_id=1)
+    # print(orders_filtred)
+    #
+    # for i in all_orders:
+    #     print(f'Айдишник: {i.user_id}, Дата: {i.creation_time}, Сумма: {i.amount}')
+
