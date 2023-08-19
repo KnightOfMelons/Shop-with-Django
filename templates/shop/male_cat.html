@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block title %}
-    Shop
+    Male category
 {% endblock title %}
 
 {% block container %}
+
 <div class="container py-5">
         <div class="row">
                 <!--Категории-->
@@ -72,7 +73,7 @@
             <div class="col-lg-9">
                 <div class="row">
 <!--НАЧАЛО ТОВАРА-->
-                    {% for product in object_list %}
+                    {% for product in category %}
                     <div class="col-md-4">
                         <form method="post" action="{% url 'add_item_to_cart' product.pk %}">
                             <div class="card mb-4 product-wap rounded-0">

@@ -14,12 +14,36 @@ class Product(models.Model):
     unit = models.CharField(max_length=255, blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
     note = models.TextField(blank=True, null=True)
+    gender = models.BooleanField(blank=True, null=True)
+    # Yes - мужское, No - женское.
+    fabric = models.CharField(max_length=100, verbose_name='fabricator', null=True)
+    type = models.CharField(max_length=100, verbose_name='product_type', null=True)
 
     class Meta:
         ordering = ['pk']
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_all_by_male_cat(self):
+        male_cat = Product.objects.filter(gender=True)
+        return male_cat
+
+    def get_all_by_female_cat(self):
+        male_cat = Product.objects.filter(gender=False)
+        return male_cat
+
+    def get_all_by_TOP(self):
+        top_cat = Product.objects.filter(type='top')
+        return top_cat
+
+    def get_all_by_BOTTOM(self):
+        bottom_cat = Product.objects.filter(type='bottom')
+        return bottom_cat
+
+    def get_all_by_ACCESSORIES(self):
+        accessories_cat = Product.objects.filter(type='accessories')
+        return accessories_cat
 
 
 class Payment(models.Model):

@@ -76,13 +76,37 @@ def history_page(request):
     return render(request, 'shop/history.html', context)
 
 
+def male_category_page(request):
+    category = Product.get_all_by_male_cat(request.user)
+    context = {
+        'category': category,
+    }
+    return render(request, 'shop/male_cat.html', context)
 
-    # all_orders = Order.objects.all()
-    # print(all_orders)
-    #
-    # orders_filtred = Order.objects.filter(user_id=1)
-    # print(orders_filtred)
-    #
-    # for i in all_orders:
-    #     print(f'Айдишник: {i.user_id}, Дата: {i.creation_time}, Сумма: {i.amount}')
+def female_category_page(request):
+    category = Product.get_all_by_female_cat(request.user)
+    context = {
+        'category': category,
+    }
+    return render(request, 'shop/female_cat.html', context)
 
+def top_category_page(request):
+    category = Product.get_all_by_TOP(request.user)
+    context = {
+        'category': category,
+    }
+    return render(request, 'shop/top_cat.html', context)
+
+def bottom_category_page(request):
+    category = Product.get_all_by_BOTTOM(request.user)
+    context = {
+        'category': category,
+    }
+    return render(request, 'shop/bottom_cat.html', context)
+
+def accessories_category_page(request):
+    category = Product.get_all_by_ACCESSORIES(request.user)
+    context = {
+        'category': category,
+    }
+    return render(request, 'shop/accessories_cat.html', context)
