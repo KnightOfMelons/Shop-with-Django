@@ -110,3 +110,17 @@ def accessories_category_page(request):
         'category': category,
     }
     return render(request, 'shop/accessories_cat.html', context)
+
+def order_list_increase(request):
+    category = Product.get_by_increase_price(request.user)
+    context = {
+        'category': category
+    }
+    return render(request, 'shop/increase_price_page.html', context)
+
+def order_list_decline(request):
+    category = Product.get_by_decline_price(request.user)
+    context = {
+        'category': category
+    }
+    return render(request, 'shop/decline_price.html', context)

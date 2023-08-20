@@ -45,6 +45,14 @@ class Product(models.Model):
         accessories_cat = Product.objects.filter(type='accessories')
         return accessories_cat
 
+    def get_by_increase_price(self):
+        increase = Product.objects.all().order_by('price')
+        return increase
+
+    def get_by_decline_price(self):
+        decline = Product.objects.all().order_by('-price')
+        return decline
+
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -105,6 +113,7 @@ class Order(models.Model):
     def get_history(user: User):
         history = Order.objects.filter(user=user)
         return history
+
 
     def get_amount(self):
         amount = Decimal(0)
