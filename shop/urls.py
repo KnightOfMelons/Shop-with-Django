@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 from main import views
 from shop.views import ProductsListView, ProductsDetailView, add_item_to_cart, \
     cart_view, CartDeleteItem, make_order, history_page, male_category_page, female_category_page,\
-    top_category_page, bottom_category_page, accessories_category_page, order_list_increase, order_list_decline
+    top_category_page, bottom_category_page, accessories_category_page, order_list_increase, order_list_decline\
+    , favorites, add_to_favorite
 
 urlpatterns = [
     path('', ProductsListView.as_view(), name='shop'),
@@ -22,4 +23,6 @@ urlpatterns = [
     path('accessories_category/', accessories_category_page, name='accessories_category'),
     path('increase_price_page/', order_list_increase, name='increase_price_page'),
     path('decline_price/', order_list_decline, name='decline_price'),
+    path('favorites/', favorites, name='favorites'),
+    path('add_favorite/<int:prod_id>', add_to_favorite, name='add_favorite')
 ]

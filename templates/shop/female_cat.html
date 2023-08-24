@@ -75,6 +75,15 @@
 <!--НАЧАЛО ТОВАРА-->
                     {% for product in category %}
                     <div class="col-md-4">
+
+                        <!--Добавление в избранное-->
+                            {% if not product.is_favorite %}
+                                <form method="post" action="{% url 'add_favorite' product.id %}" style="text-align: center">
+                                    {% csrf_token %}
+                                    <button type="submit" >Добавить в избранное</button>
+                                </form>
+                            {% endif %}
+
                         <form method="post" action="{% url 'add_item_to_cart' product.pk %}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <!--КАРТИНКА ПЕРВОГО ТОВАРА-->

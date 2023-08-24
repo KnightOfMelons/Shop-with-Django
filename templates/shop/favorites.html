@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Favorites
+{% endblock title %}
+
+{% block container %}
+ <div class="container py-5">
+        <div class="row">
+<!--НАЧАЛО ТОВАРА-->
+                    {% for product in favorite_products %}
+                    <div class="col-md-4">
+                        <!--Добавление в избранное-->
+                            {% if product.is_favorite %}
+                                <form method="post" action="{% url 'add_favorite' product.id %}" style="text-align: center">
+                                    {% csrf_token %}
+                                    <button type="submit" >Убрать из избранных</button>
+                                </form>
+                            {% endif %}
+
+                        <form method="post" action="{% url 'add_item_to_cart' product.pk %}">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <!--КАРТИНКА ПЕРВОГО ТОВАРА-->
+                                <div class="card rounded-0">
+                                    <a href="{% url 'shop_detail' product.pk %}">
+                                        <img class="card-img rounded-0 img-fluid" src="{{ product.image_url }}"></a>
+                                </div>
+                                <div class="card-body" style="text-align: center;">
+                                    <!--Название-->
+                                    <p class="text-center mb-0"><h5 style="text-align: center;">
+                                    <a style="text-decoration: none;" href="{% url 'shop_detail' product.pk %}"><h5>{{ product.name }}</h5></a></h5>
+
+                                    <!--Количество-->
+                                    <label class="form-label" for="id_quantity">Quantity</label>
+                                    <p class="text-center mb-0">
+                                        <input name="quantity" type="number" value="1"
+                                               min="1" required id="id_quantity"></p>
+                                    <!--ЦЕНА-->
+                                    {% csrf_token %}
+                                    <p class="text-center mb-0">{{ product.price }} rub.</p>
+                                    <button type="submit">buy</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endfor %}
+<!--КОНЕЦ ТОВАРА-->
+                </div>
+            </div>
+{% endblock container %}

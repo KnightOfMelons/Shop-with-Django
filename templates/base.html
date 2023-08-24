@@ -54,6 +54,11 @@ https://templatemo.com/tm-559-zay-shop
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cart_view' %}">Cart</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'favorites' %}">Favorites
+                                <img src="{% static '/img/favorites-icon.png' %}" style='min-width: 10px; width:20%; max-width: 20px;'>
+                            </a>
+                        </li>
                         {% if user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" href="/admin">Admin tools</a>
@@ -91,10 +96,11 @@ https://templatemo.com/tm-559-zay-shop
         </div>
     </nav>
     <!-- Close Header -->
-
 {% block container %}
 
 {% endblock container %}
+
+
     <!-- Start Script -->
 <!--    <script src="{% static '/js/jquery-1.11.0.min.js' %}"></script>-->
 <!--    <script src="{% static '/js/jquery-migrate-1.2.1.min.js' %}"></script>-->

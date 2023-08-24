@@ -18,6 +18,7 @@ class Product(models.Model):
     # Yes - мужское, No - женское.
     fabric = models.CharField(max_length=100, verbose_name='fabricator', null=True)
     type = models.CharField(max_length=100, verbose_name='product_type', null=True)
+    is_favorite = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['pk']
